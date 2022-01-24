@@ -12,13 +12,12 @@ source:
   sha256: {{ sha256 }}
 
 build:
-  number: 0
-  skip: true  # [win and vc<14]
+  number: 1
 
 requirements:
   build:
     - {{ compiler('cxx') }}
-    - cmake
+    - cmake {{cmake}}
     - make  # [unix]
   host: []  # Empty host dependency section
 
@@ -26,8 +25,6 @@ test:
   commands:
     - test -f ${PREFIX}/include/ghc/filesystem.hpp  # [unix]
     - test -f ${PREFIX}/lib/cmake/ghc_filesystem/ghc_filesystem-config.cmake  # [unix]
-    - if not exist %LIBRARY_PREFIX%/include/ghc/filesystem.hpp (exit 1)  # [win]
-    - if not exist %LIBRARY_PREFIX%/lib/cmake/ghc_filesystem/ghc_filesystem-config.cmake (exit 1)  # [win]
 
 about:
   home: https://github.com/gulrak/filesystem
@@ -39,5 +36,4 @@ about:
 
 extra:
   recipe-maintainers:
-    - SylvainCorlay
-    - JohanMabille
+    - open-ce/open-ce-dev-team
